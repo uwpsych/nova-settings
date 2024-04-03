@@ -20,7 +20,7 @@ class NovaSettingsStore
 
         $this->casts = array_merge($this->casts, $casts ?? []);
 
-        $this->authorizations[$path] = $authorization ?? config('nova-settings.default_page_authorization', Settings::class);
+        $this->authorizations[$path] = $authorization ?? config('nova-settings.default_page_authorization', true);
 
         return $this;
     }

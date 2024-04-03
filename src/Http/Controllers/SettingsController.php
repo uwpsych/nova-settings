@@ -20,9 +20,9 @@ class SettingsController extends Controller
 
     public function get(Request $request)
     {
-        if (!NovaSettings::canSeeSettings()) return $this->unauthorized();
-
         $path = $request->get('path', 'general');
+        if (!NovaSettings::canSeePage($path)) return $this->unauthorized();
+
         $label = NovaSettings::getPageName($path);
         $fields = $this->assignToPanels($label, $this->availableFields($path));
         $panels = $this->panelsWithDefaultLabel($label, app(NovaRequest::class));
@@ -56,9 +56,10 @@ class SettingsController extends Controller
 
     public function save(NovaRequest $request)
     {
-        if (!NovaSettings::getAuthorizations('authorizedToUpdate')) return $this->unauthorized();
-
-        $fields = $this->availableFields($request->get('path', 'general'));
+        $path = $request->get('path', 'general');
+        if (!NovaSettings::canSeePage($path)) return $this->unauthorized();
+        
+        $fields = $this->availableFields($path);
 
         // NovaDependencyContainer support
         $fields = $fields->map(function ($field) {
@@ -111,7 +112,7 @@ class SettingsController extends Controller
 
     public function deleteImage(Request $request, $pathName, $fieldName)
     {
-        if (!NovaSettings::getAuthorizations('authorizedToUpdate')) return $this->unauthorized();
+        if (!NovaSettings::canSeePage($pathName)) return $this->unauthorized();
 
         $existingRow = NovaSettings::getSettingsModel()::where('key', $fieldName)->first();
         if (isset($existingRow)) {

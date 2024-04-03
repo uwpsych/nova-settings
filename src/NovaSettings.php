@@ -21,12 +21,11 @@ class NovaSettings extends Tool
     {
         $fields = static::getFields();
         $basePath = config('nova-settings.base_path', 'nova-settings');
-        $isAuthorized = static::canSeeSettings();
         $showInSidebar = config('nova-settings.show_in_sidebar', true);
 
-        if (!$isAuthorized || !$showInSidebar || empty($fields)) return null;
-
         $fields = array_filter($fields, fn ($field) => self::canSeePage($field), ARRAY_FILTER_USE_KEY);
+
+        if (!$showInSidebar || empty($fields)) return null;
 
         if (count($fields) == 1) {
             
@@ -73,12 +72,6 @@ class NovaSettings extends Tool
         ];
 
         return $key ? $authorizations[$key] : $authorizations;
-    }
-
-    public static function canSeeSettings()
-    {
-        $auths = static::getAuthorizations();
-        return $auths['authorizedToView'] || $auths['authorizedToUpdate'];
     }
 
     /**
