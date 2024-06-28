@@ -27,7 +27,7 @@ class NovaSettings extends Tool
 
         if (!$showInSidebar || empty($fields)) return null;
 
-        if (count($fields) == 1) {
+        if (config('nova-settings.collapse-single-sidebar', true) && count($fields) == 1) {
             
             return MenuSection::make(__('novaSettings.navigationItemTitle'))
                 ->path($basePath . '/' . array_key_first($fields))
