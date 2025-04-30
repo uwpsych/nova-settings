@@ -68,7 +68,7 @@ class NovaSettingsStore
         return $this->cache[$settingKey];
     }
 
-    public function getSettings(array $settingKeys = null, array $defaults = [])
+    public function getSettings(?array $settingKeys = null, array $defaults = [])
     {
         $settingsModel = NovaSettings::getSettingsModel();
 
