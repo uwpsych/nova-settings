@@ -156,7 +156,7 @@ abstract class DuskTestCase extends \Orchestra\Testbench\Dusk\TestCase
      * @param  callable|null  $callback
      * @return void
      */
-    protected function setupLaravel(callable $callback = null)
+    protected function setupLaravel(?callable $callback = null)
     {
         $this->artisan('migrate:fresh')->run();
         $this->artisan('db:seed', ['--class' => \Database\Seeders\DatabaseSeeder::class])->run();
