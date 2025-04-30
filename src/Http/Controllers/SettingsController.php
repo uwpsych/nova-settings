@@ -201,7 +201,7 @@ class SettingsController extends Controller
     protected function assignToPanels($label, FieldCollection $fields)
     {
         return $fields->map(function ($field) use ($label) {
-            if (!$field->panel) $field->panel = $label;
+            if (!$field->panel) $field->panel = Panel::make($label);
             return $field;
         });
     }

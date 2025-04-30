@@ -42,4 +42,21 @@ return [
      * "true" = show if not defined, "false" = hide if not defined
      */
     'default_page_authorization' => true
+
+    /*
+    |--------------------------------------------------------------------------
+    | Cache settings
+    |--------------------------------------------------------------------------
+    |
+    | Here you may specify which of the cache connection should be used to
+    | cache the settings. `:memory:` is the default which is a simple
+    | in-memory cache through a singleton service class property.
+    | `null` will disable caching.
+    |
+    */
+    'cache' => [
+        'store' => env('NOVA_SETTINGS_CACHE_DRIVER', ':memory:'),
+
+        'prefix' => 'nova-settings:',
+    ],
 ];
