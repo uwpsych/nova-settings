@@ -41,7 +41,7 @@ return [
      * Default value for page authorizations. 
      * "true" = show if not defined, "false" = hide if not defined
      */
-    'default_page_authorization' => true
+    'default_page_authorization' => true,
 
     /*
     |--------------------------------------------------------------------------
