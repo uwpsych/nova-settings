@@ -39,7 +39,12 @@ class NovaSettingsCacheStore extends NovaSettingsStore
     protected function getCached($keyNames = null)
     {
         if (is_string($keyNames)) {
-            return $this->cache->get($this->getCacheKey($keyNames));
+            $cacheKey = $this->getCacheKey($keyNames);
+            if ($this->cache->has($cacheKey)) {
+                return $this->cache->get($cacheKey);
+            }
+
+            return null;
         }
 
         if (is_array($keyNames)) {
