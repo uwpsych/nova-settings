@@ -71,7 +71,10 @@ abstract class NovaSettingsStore
 
     public function getSetting($settingKey, $default = null)
     {
-        if ($cached = $this->getCached($settingKey)) return $cached;
+        $cached = $this->getCached($settingKey);
+        if (! is_null($cached)) {
+            return $cached; 
+        }
 
         $settingValue = $this->getSettingsModelClass()::getValueForKey($settingKey) ?? $default;
 
