@@ -2,12 +2,12 @@
 
 namespace Outl1ne\NovaSettings;
 
-use Laravel\Nova\Nova;
-use Laravel\Nova\Tool;
-use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Laravel\Nova\Menu\MenuItem;
 use Laravel\Nova\Menu\MenuSection;
+use Laravel\Nova\Nova;
+use Laravel\Nova\Tool;
 use Outl1ne\NovaSettings\Models\Settings;
 
 class NovaSettings extends Tool
@@ -27,8 +27,8 @@ class NovaSettings extends Tool
 
         if (!$showInSidebar || empty($fields)) return null;
 
-        if (config('nova-settings.collapse-single-sidebar', true) && count($fields) == 1) {
-            
+        if (config('nova-settings.collapse_single_sidebar', true) && count($fields) == 1) {
+
             return MenuSection::make(__('novaSettings.navigationItemTitle'))
                 ->path($basePath . '/' . array_key_first($fields))
                 ->icon('adjustments-vertical');

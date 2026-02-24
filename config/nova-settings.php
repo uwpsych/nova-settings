@@ -32,17 +32,6 @@ return [
      */
     'show_in_sidebar' => true,
 
-    /**
-     * Only show the Settings sidebar if there is a single subpage 
-     */
-    'collapse_single_sidebar' => true,
-
-    /**
-     * Default value for page authorizations. 
-     * "true" = show if not defined, "false" = hide if not defined
-     */
-    'default_page_authorization' => true,
-
     /*
     |--------------------------------------------------------------------------
     | Cache settings
@@ -59,4 +48,15 @@ return [
 
         'prefix' => 'nova-settings:',
     ],
+
+    /**
+     * Only show the Settings sidebar if there is a single subpage
+     */
+    'collapse_single_sidebar' => true,
+
+    /**
+     * Default value for page authorizations.
+     * "true" = show if not defined, "false" = hide if not defined
+     */
+    'default_page_authorization' => true,
 ];
