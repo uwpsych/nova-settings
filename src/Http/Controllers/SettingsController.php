@@ -194,6 +194,16 @@ class SettingsController extends Controller
 
     protected function makeFakeResource(string $fieldName, $fieldValue)
     {
+        // Ensure date/datetime strings are cast to Carbon so Nova's Date/DateTime
+        // fields don't throw "must cast to date" when the Settings accessor couldn't
+        // apply the cast (e.g. cache populated before Nova::serving() registered casts)
+        if (is_string($fieldValue) && !empty($fieldValue)) {
+            $castType = NovaSettings::getCasts()[$fieldName] ?? null;
+            if (in_array($castType, ['date', 'datetime'])) {
+                $fieldValue = \Illuminate\Support\Carbon::parse($fieldValue);
+            }
+        }
+
         $fakeResource = new \Laravel\Nova\Support\Fluent;
         $fakeResource->{$fieldName} = $fieldValue;
         return $fakeResource;
